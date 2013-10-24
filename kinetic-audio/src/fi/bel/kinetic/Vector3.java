@@ -15,19 +15,24 @@ public class Vector3 {
 	}
 
 	/**
-	 * Construct uniform 3-dimensional vector using the rejection technique
+	 * Construct uniform 3-dimensional vector using Marsaglia's technique
 	 *
 	 * @return vector pointing at random direction
 	 */
 	public static Vector3 random() {
 		while (true) {
-			float x = (RANDOM.nextFloat() - 0.5f) * 2.0f;
-			float y = (RANDOM.nextFloat() - 0.5f) * 2.0f;
-			float z = (RANDOM.nextFloat() - 0.5f) * 2.0f;
-			Vector3 candidate = new Vector3(x, y, z);
-			if (candidate.length() < 1.0f) {
-				return candidate.normalize();
-			}
+			float x1 = (RANDOM.nextFloat() - 0.5f) * 2.0f;
+			float x2 = (RANDOM.nextFloat() - 0.5f) * 2.0f;
+            if (x1 * x1 + x2 * x2 > 1.0f) {
+                continue;
+            }
+
+            float x3 = (float) Math.sqrt(1.0f - x1 * x1 - x2 * x2);
+            return new Vector3(
+                2.0f * x1 * x3,
+                2.0f * x2 * x3,
+                1.0f - 2.0f * (x1 * x1 + x2 * x2)
+            );
 		}
 	}
 
