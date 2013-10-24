@@ -337,7 +337,6 @@ public class Reverb {
 	}
 
 	public static void main(String[] args) {
-		System.out.println("# Calculating reverb");
 		Reverb reverb = new Reverb();
 		reverb.setRoomDimensions(3, 2.4f, 5.5f);
 		reverb.setAttenuation(0.9f);
